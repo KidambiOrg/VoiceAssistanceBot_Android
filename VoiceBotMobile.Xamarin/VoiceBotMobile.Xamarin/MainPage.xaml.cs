@@ -88,7 +88,7 @@ namespace VoiceBotMobile.Xamarin
             {
                 DialogServiceConfig config = null;
 
-                config = BotFrameworkConfig.FromSubscription("<Speech Service Key>", "<Speech service Region>");
+                config = BotFrameworkConfig.FromSubscription(Constants.CognitiveServicesApiKey, Constants.CognitiveServicesRegion);
 
                 if (this.connector != null)
                 {

@@ -24,6 +24,6 @@
             x:Name="RecognitionButton"
             Clicked="OnRecognitionButtonWithKeywordClicked"
             HorizontalOptions="FillAndExpand"
-            Text="Start speech recognition via keyword" />
+            Text="Start speech recognition " />
     </StackLayout>
 </ContentPage>

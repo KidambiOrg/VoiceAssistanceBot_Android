@@ -125,7 +125,7 @@ namespace VoiceBotMobile.Xamarin
 
                 //// Creates an instance of a speech config with specified subscription key and
                 //// service region. Replace with your own subscription key and service region (e.g., "westus").
-                //var config = SpeechConfig.FromSubscription("24838d27e2b749b9aaf27bd2c91ea506", "westus2");
+                //var config = SpeechConfig.FromSubscription("", "");
 
                 //kwsModelDir = DependencyService.Get<IAssetService>().GetAssetPath(kwsModelFile);
                 //var model = KeywordRecognitionModel.FromFile(kwsModelDir);

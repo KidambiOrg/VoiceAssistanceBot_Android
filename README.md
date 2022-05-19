@@ -2,4 +2,4 @@
 A bot based Voice Assistant (like Cortana) for Android using Azure Speech Service, DirectLine Speech and Bot Framework
 
 ## Reference Architecture
-![Voice Assistant DirectLine Speech](referencearchitecture.png)
+![Voice Assistant DirectLine Speech](ReferenceArchitecture.png)

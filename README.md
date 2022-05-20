@@ -17,7 +17,7 @@ A bot based Voice Assistant (like Cortana) for Android using Azure Speech Servic
 2. Open the `VoiceBotMobile.sln` in VS2022
 3. Click `Build Solution` from the Build menu to restore the nuget packages
 4. Open `Constants.cs` file in the project `..\VoiceBotMobile.Xamarin\VoiceBotMobile.Xamarin`
-5. Paste the Azure Speech Service (that you created as part of Pre-requisites) Key for the variable `CognitiveServicesApiKey`
+5. Paste the Azure Speech Service (that you created as part of [Pre-requisites](#Pre-Requisites)) Key for the variable `CognitiveServicesApiKey`
 6. Paste the Azure Speech Service (that you created as part of Pre-requisites) Region/location for the variable `CognitiveServicesRegion`
 7. Click Save
 8. Click on `Tools\Android\Android Device Manager` menu and create a profile for `Pixel` and model and `x86` as the processor.

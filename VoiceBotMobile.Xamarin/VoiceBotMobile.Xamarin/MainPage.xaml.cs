@@ -23,7 +23,7 @@ namespace VoiceBotMobile.Xamarin
     public partial class MainPage : ContentPage
     {
         private string kwsModelDir;
-        private string kwsModelFile = "<Keword Recognition file>";
+        private string kwsModelFile = @"[[ENTER CUSTOM WAKE WORD MODEL NAME. EX: 345EER4.table]]";
 
         private DialogServiceConnector connector = null;
         private Queue<WavQueueEntry> playbackStreams = new Queue<WavQueueEntry>();
@@ -31,7 +31,6 @@ namespace VoiceBotMobile.Xamarin
         private WakeWordConfiguration activeWakeWordConfig = null;
         private CustomSpeechConfiguration customSpeechConfig = null;
         private ListenState listening = ListenState.NotListening;
-        // public ObservableCollection<MessageDisplay> Messages { get; private set; } = new ObservableCollection<MessageDisplay>();
 
         public ObservableCollection<ActivityDisplay> Activities { get; private set; } = new ObservableCollection<ActivityDisplay>();
 
@@ -80,8 +79,6 @@ namespace VoiceBotMobile.Xamarin
             }
         }
 
-        //public EventHandler<SpeechRecognitionCanceledEventArgs> Connector_Canceled { get; private set; }
-
         private void InitSpeechConnector()
         {
             try
@@ -116,72 +113,10 @@ namespace VoiceBotMobile.Xamarin
 
                 this.connector.ConnectAsync();
 
-                //this.activeWakeWordConfig = new WakeWordConfiguration(kwsModelFile);
-                //this.connector.StartKeywordRecognitionAsync(this.activeWakeWordConfig.WakeWordModel);
-
+                //Load the custom wake word model
                 kwsModelDir = DependencyService.Get<IAssetService>().GetAssetPath(kwsModelFile);
                 var model = KeywordRecognitionModel.FromFile(kwsModelDir);
                 this.connector.StartKeywordRecognitionAsync(model);
-
-                //// Creates an instance of a speech config with specified subscription key and
-                //// service region. Replace with your own subscription key and service region (e.g., "westus").
-                //var config = SpeechConfig.FromSubscription("", "");
-
-                //kwsModelDir = DependencyService.Get<IAssetService>().GetAssetPath(kwsModelFile);
-                //var model = KeywordRecognitionModel.FromFile(kwsModelDir);
-
-                //// The phrase your keyword recognition model triggers on.
-                //var keyword = "Hey Emma";
-
-                //var stopRecognition = new TaskCompletionSource<int>();
-                //var resultStr = "";
-
-                //using (var recognizer = new SpeechRecognizer(config))
-                //{
-                //    // Subscribes to events.
-                //    recognizer.Recognized += (s, e) =>
-                //    {
-                //        if (e.Result.Reason == ResultReason.RecognizedKeyword)
-                //        {
-                //            resultStr = $"RECOGNIZED KEYWORD: '{e.Result.Text}'";
-                //        }
-                //        else if (e.Result.Reason == ResultReason.RecognizedSpeech)
-                //        {
-                //            resultStr = $"RECOGNIZED: '{e.Result.Text}'";
-                //        }
-                //        else if (e.Result.Reason == ResultReason.NoMatch)
-                //        {
-                //            resultStr = "NOMATCH: Speech could not be recognized.";
-                //        }
-                //        Debug.WriteLine(resultStr);
-                //        UpdateUI(resultStr);
-                //    };
-
-                // recognizer.Canceled += (s, e) => { var cancellation =
-                // CancellationDetails.FromResult(e.Result); resultStr = $"CANCELED:
-                // Reason={cancellation.Reason} ErrorDetails={cancellation.ErrorDetails}"; if
-                // (cancellation.Reason == CancellationReason.Error) { UpdateUI(resultStr); }
-                // Debug.WriteLine(resultStr); stopRecognition.TrySetResult(0); };
-
-                // recognizer.SessionStarted += (s, e) => { Debug.WriteLine("\nSession started
-                // event."); };
-
-                // recognizer.SessionStopped += (s, e) => { Debug.WriteLine("\nSession stopped
-                // event."); Debug.WriteLine("\nStop recognition.");
-                // stopRecognition.TrySetResult(0); };
-
-                // Debug.WriteLine($"Say something starting with the keyword '{keyword}' followed by
-                // whatever you want...");
-
-                // // Starts continuous recognition using the keyword model. Use //
-                // StopKeywordRecognitionAsync() to stop recognition. await recognizer.StartKeywordRecognitionAsync(model).ConfigureAwait(false);
-
-                // // Waits for a single successful keyword-triggered speech recognition (or //
-                // error). Use Task.WaitAny to keep the task rooted. Task.WaitAny(new[] {
-                // stopRecognition.Task });
-
-                //    await recognizer.StopKeywordRecognitionAsync().ConfigureAwait(false);
-                //}
             }
             catch (Exception ex)
             {
@@ -286,33 +221,6 @@ namespace VoiceBotMobile.Xamarin
 
                 audioTrack.Stop();
                 audioTrack.Release();
-
-                //var stream = new ProducerConsumerStream();
-
-                //Task.Run(() =>
-                //{
-                //    var buffer = new byte[800];
-                //    uint bytesRead = 0;
-                //    while ((bytesRead = audio.Read(buffer)) > 0)
-                //    {
-                //        stream.Write(buffer, 0, (int)bytesRead);
-                //    }
-                //}).Wait();
-
-                //var channelData = activity.GetChannelData<SpeechChannelData>();
-                //var id = channelData?.ConversationalAiData?.RequestInfo?.InteractionId;
-                //if (!string.IsNullOrEmpty(id))
-                //{
-                //    System.Diagnostics.Debug.WriteLine($"Expecting TTS stream {id}");
-                //}
-
-                //var wavStream = new RawSourceWaveStream(stream, new WaveFormat(16000, 16, 1));
-                //this.playbackStreams.Enqueue(new WavQueueEntry(id, false, stream, wavStream));
-
-                //if (this.player.PlaybackState != PlaybackState.Playing)
-                //{
-                //    Task.Run(() => this.PlayFromAudioQueue());
-                //}
             }
         }
 
@@ -330,13 +238,8 @@ namespace VoiceBotMobile.Xamarin
             if (entry != null)
             {
                 System.Diagnostics.Debug.WriteLine($"START playing {entry.Id}");
-                try
-                {
-                    this.player.Init(entry.Reader);
-                }
-                catch (Exception ex)
-                {
-                }
+
+                this.player.Init(entry.Reader);
 
                 this.player.Play();
 

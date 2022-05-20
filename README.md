@@ -22,7 +22,8 @@ A bot based Voice Assistant (like Cortana) for Android using Azure Speech Servic
 7. Click Save
 8. Click on `Tools\Android\Android Device Manager` menu and create a profile for `Pixel` and model and `x86` as the processor.
    1. This is needed as the Speech SDK current version does not support other processor types yet.
-9. Open `MainPage.xaml.cs` file and update the value of `kwsModelFile` the keyword model file that you downloaded as Pre-Requisite
+9. Open `MainPage.xaml.cs` file and update the value of `kwsModelFile` to the keyword model file that you downloaded as Pre-Requisite
+   1. Add the model file to the `Assets` folder inside `VoiceBotMobile.Xamarin.Android\Assets` project and set its build action to `AndroidAsset`
 10. Once create, click `Start` to start the emulator.
 11. In VS 2022, select the profile you created in step 8 in the `Run` drop down tool bar and click F5
     1. This will take few mins to build and run the app in the simulator

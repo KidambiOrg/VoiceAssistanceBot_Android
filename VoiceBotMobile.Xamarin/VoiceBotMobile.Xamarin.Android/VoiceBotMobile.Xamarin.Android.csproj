@@ -68,7 +68,9 @@
     <Compile Include="Services\AssetService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\3c87b253-3ee1-4d28-bfb2-9eb820c1f408.table" />
+    <AndroidAsset Include="Assets\3c87b253-3ee1-4d28-bfb2-9eb820c1f408.table">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
